@@ -12,35 +12,32 @@ public class MessageUtils {
 	public static String MESSAGINGHOST = "localhost";
 
 	public static byte[] encapsulate(Message message) {
-		
-		byte[] segment = null;
-		byte[] data;
-		
-		// TODO - START
-		
+
+		byte[] segment = new byte[SEGMENTSIZE];
+		byte[] data = message.getData();
+		int msglength = data.length;
+
 		// encapulate/encode the payload data of the message and form a segment
 		// according to the segment format for the messaging layer
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-			
-		// TODO - END
+
+		segment[0] = (byte) msglength;
+		System.arraycopy(data, 0, segment, 1, msglength);
+
 		return segment;
-		
 	}
 
 	public static Message decapsulate(byte[] segment) {
 
 		Message message = null;
-		
-		// TODO - START
+
 		// decapsulate segment and put received payload data into a message
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - END
-		
+		int msglength = (int) segment[0];
+		byte[] data = new byte[msglength];
+
+		System.arraycopy(segment, 1, data, 0, msglength);
+
+		message = new Message(data);
+
 		return message;
 		
 	}

@@ -1,9 +1,11 @@
 package no.hvl.dat110.messaging;
 
 
+import java.io.IOException;
 import java.net.Socket;
 
 import no.hvl.dat110.TODO;
+import org.apache.maven.settings.Server;
 
 public class MessagingClient {
 
@@ -27,12 +29,16 @@ public class MessagingClient {
 		MessageConnection connection = null;
 		
 		// TODO - START
-		// connect to messaging server using a TCP socket
-		// create and return a corresponding messaging connection
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-		
+		try {
+			// connect to messaging server using a TCP socket
+			clientSocket = new Socket(server, port);
+			// create and return a corresponding messaging connection
+			connection = new MessageConnection(clientSocket);
+
+		} catch (IOException e) {
+			System.out.println("TCP client: " + e.getMessage());
+			e.printStackTrace();
+		}
 		// TODO - END
 		return connection;
 	}

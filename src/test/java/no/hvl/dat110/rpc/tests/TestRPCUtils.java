@@ -33,9 +33,7 @@ class TestRPCUtils {
 		assertEquals(2,rpcrequest[2]);
 		
 	}
-	
 
-	
 	@Test
 	void testMarshallString() {
 		

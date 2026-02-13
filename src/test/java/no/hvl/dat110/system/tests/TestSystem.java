@@ -17,11 +17,11 @@ class TestSystem {
 		System.out.println("System starting ...");
 
 		AtomicBoolean failure = new AtomicBoolean(false);
-		
+
 		Thread displaythread = new Thread() {
 
 			public void run() {
-				
+
 				try {
 					DisplayDevice.main(null);
 				} catch (Exception e) {
@@ -29,13 +29,13 @@ class TestSystem {
 					failure.set(true);
 				}
 			}
-			
+
 		};
-		
+
 		Thread sensorthread = new Thread() {
-			
+
 			public void run() {
-				
+
 				try {
 				SensorDevice.main(null);
 				} catch (Exception e) {
@@ -43,14 +43,14 @@ class TestSystem {
 					failure.set(true);
 				}
 			}
-			
+
 		};
-		
-		
+
+
 		Thread controllerthread = new Thread() {
-			
+
 			public void run() {
-				
+
 				try {
 				Controller.main(null);
 				} catch (Exception e) {
@@ -58,19 +58,19 @@ class TestSystem {
 					failure.set(true);
 				}
 			}
-			
+
 		};
 
 		try {
-			
+
 			displaythread.start();
 			sensorthread.start();
-		
+
 			// let the servers start first
-			Thread.sleep(2000);
-			
+			Thread.sleep(5000);
+
 			controllerthread.start();
-			
+
 			displaythread.join();
 			sensorthread.join();
 			controllerthread.join();
@@ -80,16 +80,16 @@ class TestSystem {
 			fail();
 		} finally {
 			System.out.println("System stopping ...");
-			
+
 			if (failure.get()) {
 				fail();
 			}
 		}
-		
+
 		// we check only termination here
 		assertTrue(true);
-			
-	
+
+
 	}
 
 }
